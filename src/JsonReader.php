@@ -183,6 +183,13 @@ class JsonReader implements ChunkJsonReaderInterface
             return;
         }
 
+        if ($character == ']') {
+            $this->structStack->top()->setState(self::STATE_ARRAY_END);
+            $this->value = null;
+
+            return;
+        }
+
         if ($character == '"') {
             $this->readStringValue();
 
